@@ -1,23 +1,16 @@
 import React from 'react';
 import './App.css';
 import { useCurrentLoad } from './hooks/useCurrentLoad';
-import { useStatistics } from './hooks/useStatistics';
-import { CurrentLoad } from './components/CurrentLoad';
+import { Statistics } from './components/Statistics';
 
 function App() {
-  const { currentLoad } = useCurrentLoad();
-  const { getAverageForLastXTimesPolled, averageFromBeginning } = useStatistics(
-    currentLoad
-  );
+  const { currentLoad, getAverageForLastXTimesPolled } = useCurrentLoad();
   return (
     <div className="App">
-      <CurrentLoad load={currentLoad} />
-      <ul>
-        <li>10s: {getAverageForLastXTimesPolled(10)}</li>
-        <li>1m: {getAverageForLastXTimesPolled(60)}</li>
-        <li>2m: {getAverageForLastXTimesPolled(120)}</li>
-        <li>total: {averageFromBeginning}</li>
-      </ul>
+      <Statistics
+        getAverageForLastXTimesPolled={getAverageForLastXTimesPolled}
+        load={currentLoad}
+      />
     </div>
   );
 }
