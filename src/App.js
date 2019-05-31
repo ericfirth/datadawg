@@ -1,26 +1,13 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import { get } from 'axios';
+import useCurrentLoad from './hooks/useCurrentLoad';
+import { CurrentLoad } from './components/CurrentLoad';
 
 function App() {
-  get('/api/load').then(response => console.log(response));
+  const { currentLoad } = useCurrentLoad();
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <CurrentLoad load={currentLoad} />
     </div>
   );
 }
