@@ -16,24 +16,25 @@ const makeGetAverage = loads => numRelevantForAverage => {
 };
 
 export const useCurrentLoad = () => {
-  const [currentLoad, setCurrentLoad] = React.useState();
   // const loads = React.useRef([]);
   const [loads, setLoads] = React.useState([]);
+  const timesPolled = React.useRef(0);
 
   // setup polling interval
   useInterval(() => {
     get('/api/load').then(response => {
-      setCurrentLoad(response.data.load);
       setLoads([
         ...loads.slice(loads.length - 600, loads.length),
         response.data.load,
       ]);
+      timesPolled.current++;
     });
   }, 1000);
 
   return {
-    currentLoad,
+    currentLoad: loads[loads.length - 1],
     loads,
     getAverageForLastXTimesPolled: makeGetAverage(loads),
+    timesPolled,
   };
 };
