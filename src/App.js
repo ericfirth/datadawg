@@ -8,17 +8,14 @@ import { Alerts } from './components/Alerts';
 function App() {
   const {
     currentLoad,
-    getAverageForLastXTimesPolled,
-    timesPolled,
   } = useCurrentLoad();
 
   return (
     <div className="App">
       <Statistics
-        getAverageForLastXTimesPolled={getAverageForLastXTimesPolled}
         load={currentLoad}
       />
-      <Chart getTenSecondAverage={'hi'} currentLoad={currentLoad} />
+      <Chart currentLoad={currentLoad} />
       <Alerts />
     </div>
   );

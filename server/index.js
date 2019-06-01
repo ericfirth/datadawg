@@ -11,17 +11,15 @@ app.use(pino);
 app.get('/api/load', (req, res) => {
   const [oneSecondAvg] = os.loadavg();
   const numCpus = os.cpus().length;
-  const load = Math.round(oneSecondAvg / numCpus * 100);
+  const load = {
+    value: Math.round(oneSecondAvg / numCpus * 100),
+    at: Date.now(),
+  };
+  console.log(load);
 
   res.setHeader('Content-Type', 'application/json');
 
-  console.log({ oneSecondAvg, load });
-
-  res.send(
-    JSON.stringify({
-      load,
-    })
-  );
+  res.send(JSON.stringify(load));
 });
 
 app.listen(5000, () => console.log('Express server is running on localhost:5000'));

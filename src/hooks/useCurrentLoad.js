@@ -2,39 +2,28 @@ import React from 'react';
 import { get } from 'axios';
 import { useInterval } from './useInterval';
 
-const makeGetAverage = loads => numRelevantForAverage => {
-  if (loads.length < 1) return;
+// const makeGetAverage = loads => numRelevantForAverage => {
+//   if (loads.length < 1) return;
 
-  const totalRelevantLoad = loads
-    .slice(loads.length - numRelevantForAverage, loads.length)
-    .reduce((sum, load) => sum + load, 0);
+// const totalRelevantLoad = loads
+//   .slice(loads.length - numRelevantForAverage, loads.length)
+//   .reduce((sum, load) => sum + load, 0);
 
-  const numRelevantLoads =
-    loads.length < numRelevantForAverage ? loads.length : numRelevantForAverage;
+// const numRelevantLoads =
+//   loads.length < numRelevantForAverage ? loads.length : numRelevantForAverage;
 
-  return totalRelevantLoad / numRelevantLoads;
-};
+// return totalRelevantLoad / numRelevantLoads;
+// };
 
 export const useCurrentLoad = () => {
-  // const loads = React.useRef([]);
-  const [loads, setLoads] = React.useState([]);
-  const timesPolled = React.useRef(0);
+  const [load, setLoad] = React.useState();
 
   // setup polling interval
   useInterval(() => {
-    get('/api/load').then(response => {
-      setLoads([
-        ...loads.slice(loads.length - 600, loads.length),
-        response.data.load,
-      ]);
-      timesPolled.current++;
-    });
+    get('/api/load').then(response => setLoad(response.data));
   }, 1000);
 
   return {
-    currentLoad: loads[loads.length - 1],
-    loads,
-    getAverageForLastXTimesPolled: makeGetAverage(loads),
-    timesPolled,
+    currentLoad: load,
   };
 };
