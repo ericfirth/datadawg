@@ -5,8 +5,7 @@ const hasTenMinutesOfAverages = averages => averages.length >= 60;
 const oneLessThanTenMinutesOfAverages = averages =>
   hasTenMinutesOfAverages(averages) ? averages.slice(1, 60) : averages;
 
-export const Chart = props => {
-  console.log('chart rendered');
+const Chart = props => {
   const { average: tenSecondAverage } = useAverageLoad(10, props.currentLoad);
   const [averages, setAverages] = React.useState([]);
 
@@ -22,3 +21,5 @@ export const Chart = props => {
   console.log(averages);
   return <div>averages: {averages.toLocaleString()}</div>;
 };
+
+export default Chart;

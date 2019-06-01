@@ -12,8 +12,8 @@ app.get('/api/load', (req, res) => {
   const [oneSecondAvg] = os.loadavg();
   const numCpus = os.cpus().length;
   const load = {
-    value: Math.round(oneSecondAvg / numCpus * 100),
-    at: Date.now(),
+    value: oneSecondAvg / numCpus,
+    timestamp: Date.now(),
   };
   console.log(load);
 
