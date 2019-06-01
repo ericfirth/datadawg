@@ -14,7 +14,7 @@ function App() {
     <div className="App">
       <Statistics load={currentLoad} />
       <Chart currentLoad={currentLoad} />
-      <Alerts />
+      <Alerts alerts={alerts} />
     </div>
   );
 }

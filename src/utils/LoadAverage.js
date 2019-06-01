@@ -38,13 +38,13 @@ class LoadAverage {
   }
 
   higherThan(number) {
-    if (isNull(this.average())) return false;
-    return this.average() > number;
+    if (isNull(this.value())) return false;
+    return this.value() > number;
   }
 
   lowerThan(number) {
-    if (isNull(this.average())) return false;
-    return this.average() < number;
+    if (isNull(this.value())) return false;
+    return this.value() < number;
   }
 
   isAtMaxLength() {
@@ -58,4 +58,4 @@ class LoadAverage {
   }
 }
 
-export default LoadAverager;
+export default LoadAverage;
