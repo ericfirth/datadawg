@@ -3,7 +3,7 @@ import './App.css';
 import { useCurrentLoadEverySecond } from './hooks/useCurrentLoadEverySecond';
 import { useAlerts } from './hooks/useAlerts';
 import { Statistics } from './components/Statistics';
-import Chart from './components/Chart';
+import { ChartSection } from './components/Chart';
 import { Alerts } from './components/Alerts';
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App">
       <Statistics load={currentLoad} />
-      <Chart currentLoad={currentLoad} />
+      <ChartSection currentLoad={currentLoad} />
       <Alerts alerts={alerts} />
     </div>
   );

@@ -47,10 +47,16 @@ table {
     border-spacing: 0;
 }
 
+html {
+  background: #eee;
+}
+
 .App {
   width: 900px;
-  background-color: #ccc;
+  padding: 20px;
+  background: white;
 	margin: auto;
+  font-family: Karla;
 }
 
 
@@ -65,8 +71,56 @@ table {
 }
 
 .indicator .load-value {
-  font-size: 24px;
+  font-size: 60px;
 }
   
+.chart-wrapper {
+  display: flex;
+  width: 900px;
+}
+
+.chart-wrapper > .x-axis {
+  width: 50px;
+  justify-content: space-between;
+}
+
+.chart-wrapper > .x-axis > li {
+  height: 100px;
+  position: relative;
+}
+
+.chart-wrapper > .x-axis > li:after {
+  content: '';
+  position: absolute;
+  width: 800px;
+  height: 1px;
+  background-color: #ccc;
+  left: 30px;
+}
+
+
+.chart-wrapper > .chart {
+  display: flex;
+  width: 780px;
+  height: 300px;
+  align-items: flex-end;
+  border: 1px solid #ccc;
+  border-right: 0
+}
+
+.chart-wrapper > .chart > .bar {
+  width: 12px;
+  margin-right: 1px;
+  background-color: green;
+}
+
+.chart-wrapper > .chart > .bar.warning {
+  background-color: yellow;
+}
+
+
+.chart-wrapper > .chart > .bar.too-high {
+  background-color: red;
+}
 
 

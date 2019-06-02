@@ -1,13 +1,10 @@
 import React from 'react';
+import classnames from 'classnames';
 
 const LoadIndicator = props => (
-  <ul className="indicator">
-    <li className="load-value">
-      {props.load
-        ? props.load.value.toLocaleString(undefined, { maximumSignificantDigits: 3 })
-        : '-'}
-    </li>
+  <ul className={classnames('indicator', props.className)}>
     <li className="load-label">{props.label}</li>
+    <li className="load-value">{props.load ? props.load.asPercent() : '-'}</li>
   </ul>
 );
 

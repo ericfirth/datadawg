@@ -14,10 +14,6 @@ export const useAlerts = currentLoad => {
     () => {
       if (!currentLoad) return;
       twoMinuteAverage.current.add(currentLoad);
-      console.log({
-        alerting: inAlert.current,
-        average: twoMinuteAverage.current.value(),
-      });
 
       if (!inAlert.current && twoMinuteAverage.current.higherThan(1)) {
         inAlert.current = true;
