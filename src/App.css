@@ -59,6 +59,15 @@ html {
   font-family: Karla;
 }
 
+h2 {
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: 10px 0;
+  padding: 5px 0;
+  background-color: #ccc;
+
+}
 
 
 .basic-stats {

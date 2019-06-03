@@ -1,20 +1,24 @@
 import { isNull } from 'lodash';
+import Load from './Load';
 
 class LoadAverage {
-  constructor(maxLoads, canMakeAverageEarly = false) {
+  constructor(
+    maxLoads,
+    { resultsBeforeThreshold } = { resultsBeforeThreshold: true }
+  ) {
     this.maxLoadsToHoldOnto = maxLoads || 600; // 10 minutes
     this.first = null;
     this.last = null;
     this.length = 0;
     this.total = 0;
-    this.canMakeAverageEarly = canMakeAverageEarly;
+    this.resultsBeforeThreshold = resultsBeforeThreshold;
   }
 
   add(load) {
     this.total = this.total + load.value;
     this.length++;
 
-    if (!this.last && !this.last) {
+    if (!this.first && !this.last) {
       this.last = load;
       this.first = load;
       this.length = 1;
@@ -26,7 +30,7 @@ class LoadAverage {
     load.next = currentFirst;
     this.first = load;
 
-    if (this.isAtMaxLength()) {
+    if (this.hasTooManyLoads()) {
       this.total = this.total - this.last.value;
       this.last = this.last.previous;
       this.length--;
@@ -37,24 +41,24 @@ class LoadAverage {
     return this.isReadyForAverage() ? this.total / this.length : null;
   }
 
-  higherThan(number) {
-    if (isNull(this.value())) return false;
-    return this.value() > number;
-  }
+  valueAsLoad() {
+    if (!this.isReadyForAverage()) return null;
 
-  lowerThan(number) {
-    if (isNull(this.value())) return false;
-    return this.value() < number;
+    return new Load({ value: this.value(), timestamp: this.first.timestamp });
   }
 
   isAtMaxLength() {
-    return this.length >= this.maxLoadsToHoldOnto;
+    return this.length === this.maxLoadsToHoldOnto;
+  }
+
+  hasTooManyLoads() {
+    return this.length > this.maxLoadsToHoldOnto;
   }
 
   isReadyForAverage() {
     if (this.length === 0) return false;
 
-    return this.canMakeAverageEarly ? true : this.isAtMaxLength();
+    return this.resultsBeforeThreshold ? true : this.isAtMaxLength();
   }
 }
 

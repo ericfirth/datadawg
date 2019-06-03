@@ -4,10 +4,6 @@ export default class Load {
     this.timestamp = timestamp;
   }
 
-  valueString() {
-    return this.value.toLocaleString(undefined, { maximumSignificantDigits: 3 });
-  }
-
   asPercent() {
     return this.value.toLocaleString(undefined, {
       style: 'percent',
@@ -15,7 +11,7 @@ export default class Load {
     });
   }
 
-  date() {
-    return new Date(this.timestamp);
+  dateString() {
+    return new Date(this.timestamp).toLocaleString();
   }
 }
