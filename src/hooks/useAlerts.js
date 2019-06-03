@@ -7,10 +7,7 @@ const exceedsThresholdAlert = (load, time) =>
 const belowThresholdAlert = time => `High threshold alert over at ${time}`;
 
 export const useAlerts = currentLoad => {
-  const {
-    average: twoMinuteAverage,
-    averageCalculator: twoMinuteAverageCalculator,
-  } = useAverage(currentLoad, 120, {
+  const { average: twoMinuteAverage } = useAverage(currentLoad, 120, {
     liveResults: true,
     resultsBeforeThreshold: true,
   });
