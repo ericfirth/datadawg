@@ -31,7 +31,7 @@ export const useAverage = (
         setAverage(averageCalculator.current.valueAsLoad());
       }
     },
-    [load, numToAverage, liveResults]
+    [load, numToAverage, liveResults, resultsBeforeThreshold]
   );
 
   return { average, averageCalculator };

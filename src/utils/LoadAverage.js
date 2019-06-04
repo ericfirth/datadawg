@@ -1,4 +1,3 @@
-import { isNull } from 'lodash';
 import { Load } from './Load';
 
 export class LoadAverage {

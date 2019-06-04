@@ -1,5 +1,4 @@
 import React from 'react';
-import { useAverageLoad } from '../../hooks/useAverageLoad';
 import { AverageBar } from './AverageBar';
 import { useAverage } from '../../hooks/useAverage';
 
@@ -7,7 +6,6 @@ const hasTenMinutesOfAverages = averages => averages.length >= 60;
 const oneLessThanTenMinutesOfAverages = averages =>
   hasTenMinutesOfAverages(averages) ? averages.slice(1, 60) : averages;
 
-const columns = ['time', 'load'];
 const Chart = props => {
   const { average: tenSecondAverage } = useAverage(props.currentLoad, 10, {
     liveResults: false,

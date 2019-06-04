@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames';
-import LoadAverage from '../utils/LoadAverage';
 import { useAverage } from '../hooks/useAverage';
 
 const LoadIndicator = props => (
