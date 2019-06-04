@@ -120,16 +120,16 @@ h2 {
 .chart-wrapper > .chart > .bar {
   width: 12px;
   margin-right: 1px;
-  background-color: green;
+  background-color: #5fd229;
 }
 
 .chart-wrapper > .chart > .bar.warning {
-  background-color: yellow;
+  background-color: #d3c22a;
 }
 
 
 .chart-wrapper > .chart > .bar.too-high {
-  background-color: red;
+  background-color: #d64a2a;
 }
 
 

@@ -1,4 +1,4 @@
-export default class Load {
+export class Load {
   constructor({ value, timestamp }) {
     this.value = value;
     this.timestamp = timestamp;

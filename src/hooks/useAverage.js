@@ -1,5 +1,5 @@
 import React from 'react';
-import LoadAverage from '../utils/LoadAverage';
+import { LoadAverage } from '../utils/LoadAverage';
 
 export const useAverage = (
   load,

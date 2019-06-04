@@ -1,41 +1,21 @@
 import React from 'react';
 import { useAverage } from './useAverage';
-import LoadAverage from '../utils/LoadAverage';
-
-const exceedsThresholdAlert = (load, time) =>
-  `High load generated an alert - load = ${load}, triggered at ${time}`;
-const belowThresholdAlert = time => `High threshold alert over at ${time}`;
+import { Alerter } from '../utils/Alerter';
 
 export const useAlerts = currentLoad => {
   const { average: twoMinuteAverage } = useAverage(currentLoad, 120, {
     liveResults: true,
-    resultsBeforeThreshold: true,
+    resultsBeforeThreshold: false,
   });
-  const [alerts, setAlerts] = React.useState([]);
-  const inAlert = React.useRef(false);
+  const alerter = React.useRef(new Alerter());
 
   React.useEffect(
     () => {
       if (!twoMinuteAverage) return;
-
-      if (!inAlert.current && twoMinuteAverage.value > 0.75) {
-        inAlert.current = true;
-        setAlerts([
-          exceedsThresholdAlert(
-            twoMinuteAverage.value,
-            twoMinuteAverage.dateString()
-          ),
-          ...alerts,
-        ]);
-      }
-
-      if (inAlert.current && twoMinuteAverage.value < 0.75) {
-        inAlert.current = false;
-        setAlerts([belowThresholdAlert(twoMinuteAverage.dateString()), ...alerts]);
-      }
+      alerter.current.updateWith(twoMinuteAverage);
     },
     [twoMinuteAverage]
   );
 
-  return { alerts };
+  return { alerts: alerter.current.alerts };
 };

@@ -1,7 +1,7 @@
 import { isNull } from 'lodash';
-import Load from './Load';
+import { Load } from './Load';
 
-class LoadAverage {
+export class LoadAverage {
   constructor(
     maxLoads,
     { resultsBeforeThreshold } = { resultsBeforeThreshold: true }
@@ -61,5 +61,3 @@ class LoadAverage {
     return this.resultsBeforeThreshold ? true : this.isAtMaxLength();
   }
 }
-
-export default LoadAverage;

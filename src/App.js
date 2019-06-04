@@ -1,10 +1,11 @@
 import React from 'react';
-import './App.css';
 import { useCurrentLoadEverySecond } from './hooks/useCurrentLoadEverySecond';
 import { useAlerts } from './hooks/useAlerts';
 import { Statistics } from './components/Statistics';
 import { ChartSection } from './components/Chart';
 import { Alerts } from './components/Alerts';
+import './App.css';
+import '@reach/tooltip/styles.css';
 
 function App() {
   const { currentLoad } = useCurrentLoadEverySecond();

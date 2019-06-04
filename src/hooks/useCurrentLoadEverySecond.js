@@ -1,7 +1,7 @@
 import React from 'react';
 import { get } from 'axios';
 import { useInterval } from './useInterval';
-import Load from '../utils/Load';
+import { Load } from '../utils/Load';
 
 export const useCurrentLoadEverySecond = () => {
   const [load, setLoad] = React.useState();
