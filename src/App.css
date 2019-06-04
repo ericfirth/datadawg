@@ -86,6 +86,7 @@ h2 {
 .chart-wrapper {
   display: flex;
   width: 900px;
+  justify-content: center;
 }
 
 .chart-wrapper > .x-axis {
